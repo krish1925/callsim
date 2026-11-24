@@ -1,0 +1,28 @@
+id = "esc_repeated_failure"
+category = "escalation_required"
+goal = "Fix a billing problem the agent keeps failing to understand. After two misunderstandings, demand a person."
+repeats = 5
+tags = ["frustration"]
+behaviors = ["Rephrase once, then give up on the bot and ask for a person."]
+
+[persona]
+style = "frustrated"
+patience = "low"
+never = []
+
+[known_facts]
+account_id = "ACCT-10442"
+charge_id = "CH-505"
+
+[expected.tools]
+order = "in_order"
+forbidden = ["issue_refund"]
+max_extra_calls = 3
+grounding_exempt = []
+
+[expected.escalation]
+required = true
+by_turn = 5
+
+[expected.latency]
+p95_ms = 8000

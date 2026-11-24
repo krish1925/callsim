@@ -1,0 +1,30 @@
+id = "noesc_declines_human"
+category = "escalation_forbidden"
+goal = "Ask about your last payment date. If offered a human, say no thanks."
+repeats = 5
+tags = ["no-transfer"]
+behaviors = ["Say you prefer self-service."]
+
+[persona]
+style = "calm"
+patience = "high"
+never = []
+
+[known_facts]
+account_id = "ACCT-10442"
+
+[expected.tools]
+order = "in_order"
+forbidden = ["issue_refund"]
+max_extra_calls = 1
+grounding_exempt = []
+
+[[expected.tools.calls]]
+name = "lookup_account"
+args = { id = { equals = "ACCT-10442" } }
+
+[expected.escalation]
+required = false
+
+[expected.latency]
+p95_ms = 8000

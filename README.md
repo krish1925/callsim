@@ -15,8 +15,10 @@ Generic voice-agent evals (EVA, Pipecat Evals, LangWatch) score the conversation
 | Checks (`callsim/scorers/`) | Done, no network and no LLM. See below. |
 | Connect log extractor (`callsim/adapters/connect_logs.py`) | Done as pure functions over CloudWatch records, tested on fixtures. Flow-log field names are **not yet verified against a real instance**. |
 | Known-bad test | Done. A trace with four planted faults fails exactly four checks. |
+| LLM client (`callsim/llm.py`) | Done. Stdlib client for any OpenAI-compatible server; defaults to a local MiMo on `127.0.0.1:8000`. Override with `CALLSIM_LLM_BASE_URL` / `CALLSIM_LLM_MODEL`. |
+| Simulated caller (`callsim/caller.py`) | Done, with fact and role-break guards. |
+| Scenarios | 18 in `scenarios/`, linted and coverage-checked. Design in [docs/TEST_STRATEGY.md](docs/TEST_STRATEGY.md). |
 | Connect chat driver | Not started (needs a test instance). |
-| Scenarios (15–20), simulated caller | Not started. |
 
 ## The checks
 
@@ -52,4 +54,4 @@ make check   # ruff, mypy --strict, pytest
 
 ## License
 
-Apache-2.0 intended; the `LICENSE` file has not been added yet.
+Apache-2.0, see [LICENSE](LICENSE).

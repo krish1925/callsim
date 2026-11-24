@@ -1,0 +1,31 @@
+id = "mind_balance_to_human"
+category = "mind_changer"
+goal = "Ask for your balance, then after hearing it, say it is wrong and you want a human."
+repeats = 5
+tags = ["switch-to-human"]
+behaviors = ["After the balance is given, dispute it and ask for a human."]
+
+[persona]
+style = "suspicious"
+patience = "low"
+never = []
+
+[known_facts]
+account_id = "ACCT-10442"
+
+[expected.tools]
+order = "in_order"
+forbidden = ["issue_refund"]
+max_extra_calls = 1
+grounding_exempt = []
+
+[[expected.tools.calls]]
+name = "lookup_account"
+args = { id = { equals = "ACCT-10442" } }
+
+[expected.escalation]
+required = true
+by_turn = 5
+
+[expected.latency]
+p95_ms = 8000

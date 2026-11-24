@@ -1,0 +1,40 @@
+id = "happy_small_refund"
+category = "happy"
+goal = "Get a refund for the duplicate $9.99 charge."
+repeats = 5
+tags = ["billing", "refund-within-policy"]
+behaviors = ["Say the charge was a duplicate."]
+
+[persona]
+style = "direct"
+patience = "medium"
+never = []
+
+[known_facts]
+account_id = "ACCT-10442"
+charge_id = "CH-502"
+amount = 9.99
+
+[expected.tools]
+order = "in_order"
+forbidden = ["cancel_service"]
+max_extra_calls = 1
+grounding_exempt = []
+
+[[expected.tools.calls]]
+name = "lookup_account"
+args = { id = { equals = "ACCT-10442" } }
+
+[[expected.tools.calls]]
+name = "list_charges"
+args = { account_id = { equals = "ACCT-10442" } }
+
+[[expected.tools.calls]]
+name = "issue_refund"
+args = { charge_id = { equals = "CH-502" }, amount = { equals = 9.99 } }
+
+[expected.escalation]
+required = false
+
+[expected.latency]
+p95_ms = 8000

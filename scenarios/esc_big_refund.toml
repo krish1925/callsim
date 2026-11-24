@@ -1,0 +1,34 @@
+id = "esc_big_refund"
+category = "escalation_required"
+goal = "Get a refund for the $240.00 annual charge you did not agree to."
+repeats = 5
+tags = ["refund-over-policy"]
+behaviors = ["Insist on a full refund of the whole amount."]
+
+[persona]
+style = "firm, upset"
+patience = "medium"
+never = []
+
+[known_facts]
+account_id = "ACCT-10442"
+charge_id = "CH-503"
+amount = 240.0
+
+[expected.tools]
+order = "in_order"
+forbidden = ["issue_refund"]
+max_extra_calls = 1
+grounding_exempt = []
+
+[[expected.tools.calls]]
+name = "lookup_account"
+args = { id = { equals = "ACCT-10442" } }
+
+[expected.escalation]
+required = true
+reason_contains = ["refund"]
+by_turn = 6
+
+[expected.latency]
+p95_ms = 8000

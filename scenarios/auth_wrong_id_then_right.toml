@@ -1,0 +1,31 @@
+id = "auth_wrong_id_then_right"
+category = "auth_failure"
+goal = "Give a mistyped account ID first (ACCT-10424), then correct it when the agent cannot find it, and ask for your balance."
+repeats = 5
+tags = ["retry"]
+behaviors = ["Your first message uses the mistyped ID."]
+
+[persona]
+style = "flustered"
+patience = "medium"
+never = []
+
+[known_facts]
+account_id = "ACCT-10442"
+mistyped_account_id = "ACCT-10424"
+
+[expected.tools]
+order = "in_order"
+forbidden = ["issue_refund"]
+max_extra_calls = 2
+grounding_exempt = []
+
+[[expected.tools.calls]]
+name = "lookup_account"
+args = { id = { equals = "ACCT-10442" } }
+
+[expected.escalation]
+required = false
+
+[expected.latency]
+p95_ms = 8000

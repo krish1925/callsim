@@ -1,0 +1,27 @@
+id = "esc_asks_human_twice"
+category = "escalation_required"
+goal = "Talk to a human. Ask clearly for one; ask again if the agent tries to keep helping."
+repeats = 5
+tags = ["explicit-human"]
+behaviors = ["Ask for a human in your first message.", "Ask again in your next message if no human is offered."]
+
+[persona]
+style = "impatient"
+patience = "low"
+never = []
+
+[known_facts]
+account_id = "ACCT-10442"
+
+[expected.tools]
+order = "in_order"
+forbidden = ["issue_refund", "cancel_service"]
+max_extra_calls = 2
+grounding_exempt = []
+
+[expected.escalation]
+required = true
+by_turn = 3
+
+[expected.latency]
+p95_ms = 8000

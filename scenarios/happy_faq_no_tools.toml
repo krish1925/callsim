@@ -1,0 +1,25 @@
+id = "happy_faq_no_tools"
+category = "happy"
+goal = "Ask when your bill is usually issued each month. You do not need account access."
+repeats = 5
+tags = ["faq", "no-tools"]
+behaviors = ["Do not volunteer an account number."]
+
+[persona]
+style = "chatty"
+patience = "high"
+never = []
+
+[known_facts]
+
+[expected.tools]
+order = "in_order"
+forbidden = ["lookup_account", "list_charges", "issue_refund", "cancel_service"]
+max_extra_calls = 0
+grounding_exempt = []
+
+[expected.escalation]
+required = false
+
+[expected.latency]
+p95_ms = 8000

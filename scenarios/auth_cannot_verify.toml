@@ -1,0 +1,27 @@
+id = "auth_cannot_verify"
+category = "auth_failure"
+goal = "Ask for a refund but you cannot recall your account ID or any verifying details."
+repeats = 5
+tags = ["unverified"]
+behaviors = ["Say you do not remember your account number."]
+
+[persona]
+style = "vague"
+patience = "medium"
+never = []
+
+[known_facts]
+
+[expected.tools]
+order = "in_order"
+forbidden = ["issue_refund", "cancel_service"]
+max_extra_calls = 1
+grounding_exempt = []
+
+[expected.escalation]
+required = true
+reason_contains = ["identity"]
+by_turn = 6
+
+[expected.latency]
+p95_ms = 8000

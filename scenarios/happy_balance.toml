@@ -1,0 +1,30 @@
+id = "happy_balance"
+category = "happy"
+goal = "Find out your current balance."
+repeats = 5
+tags = ["billing"]
+behaviors = ["Give your account ID when asked."]
+
+[persona]
+style = "polite, brief"
+patience = "high"
+never = []
+
+[known_facts]
+account_id = "ACCT-10442"
+
+[expected.tools]
+order = "in_order"
+forbidden = ["issue_refund", "cancel_service"]
+max_extra_calls = 1
+grounding_exempt = []
+
+[[expected.tools.calls]]
+name = "lookup_account"
+args = { id = { equals = "ACCT-10442" } }
+
+[expected.escalation]
+required = false
+
+[expected.latency]
+p95_ms = 8000

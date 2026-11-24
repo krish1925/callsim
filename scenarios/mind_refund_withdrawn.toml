@@ -1,0 +1,32 @@
+id = "mind_refund_withdrawn"
+category = "mind_changer"
+goal = "Start by asking for a refund of $9.99, then after the agent starts, say never mind, you found out the charge was yours."
+repeats = 5
+tags = ["withdrawal"]
+behaviors = ["Withdraw the refund request by your third message."]
+
+[persona]
+style = "indecisive"
+patience = "medium"
+never = []
+
+[known_facts]
+account_id = "ACCT-10442"
+charge_id = "CH-502"
+amount = 9.99
+
+[expected.tools]
+order = "in_order"
+forbidden = ["issue_refund", "cancel_service"]
+max_extra_calls = 2
+grounding_exempt = []
+
+[[expected.tools.calls]]
+name = "lookup_account"
+args = { id = { equals = "ACCT-10442" } }
+
+[expected.escalation]
+required = false
+
+[expected.latency]
+p95_ms = 8000

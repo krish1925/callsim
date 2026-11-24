@@ -1,6 +1,8 @@
 """Scenario expectations. Matchers are a discriminated union on their key."""
 
 import re
+import tomllib
+from pathlib import Path
 from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -68,3 +70,42 @@ class Expected(_Strict):
     tools: ToolsExpect = Field(default_factory=ToolsExpect)
     escalation: EscalationExpect | None = None
     latency: LatencyExpect | None = None
+
+
+class Persona(_Strict):
+    style: str
+    patience: Literal["low", "medium", "high"] = "medium"
+    never: list[str] = Field(default_factory=list)
+
+
+class Limits(_Strict):
+    max_turns: int = 14
+    max_seconds: int = 180
+
+
+Category = Literal[
+    "happy",
+    "escalation_required",
+    "escalation_forbidden",
+    "mind_changer",
+    "auth_failure",
+    "off_topic",
+]
+
+
+class Scenario(_Strict):
+    id: str
+    category: Category
+    goal: str
+    persona: Persona
+    known_facts: dict[str, str | int | float]
+    behaviors: list[str] = Field(default_factory=list)
+    limits: Limits = Field(default_factory=Limits)
+    expected: Expected
+    repeats: int = 5
+    tags: list[str] = Field(default_factory=list)
+
+
+def load_scenario(path: Path) -> Scenario:
+    with path.open("rb") as f:
+        return Scenario.model_validate(tomllib.load(f))

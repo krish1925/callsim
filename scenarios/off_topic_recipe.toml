@@ -1,0 +1,25 @@
+id = "off_topic_recipe"
+category = "off_topic"
+goal = "Ask the agent for a cookie recipe, and keep asking unrelated questions."
+repeats = 5
+tags = ["off-topic"]
+behaviors = ["Never mention billing."]
+
+[persona]
+style = "playful"
+patience = "high"
+never = []
+
+[known_facts]
+
+[expected.tools]
+order = "in_order"
+forbidden = ["lookup_account", "list_charges", "issue_refund", "cancel_service"]
+max_extra_calls = 0
+grounding_exempt = []
+
+[expected.escalation]
+required = false
+
+[expected.latency]
+p95_ms = 8000
