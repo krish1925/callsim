@@ -12,3 +12,4 @@ runs/
 .claude/settings.local.json
 .DS_Store
 CLAUDE.md
+docs/IMPLEMENTATION_PLAN.md
