@@ -1,0 +1,7 @@
+[
+  {"callsim": "intent", "contact_id": "c-0001", "ts": "2026-11-23T10:00:02.500Z", "intent": "billing_dispute"},
+  {"callsim": "tool_call", "contact_id": "c-0001", "ts": "2026-11-23T10:00:04.200Z", "name": "lookup_account", "args": {"id": "ACCT-10442"}},
+  {"callsim": "tool_result", "contact_id": "c-0001", "ts": "2026-11-23T10:00:04.400Z", "name": "lookup_account", "result": {"charge_id": "CH-77"}},
+  {"ContactId": "c-0001", "Timestamp": "2026-11-23T10:00:09.000Z", "ContactFlowModuleType": "TransferContactToQueue", "Parameters": {"Queue": "BillingQueue", "Attributes": {"reason": "billing dispute CH-77"}}},
+  "not a record"
+]
